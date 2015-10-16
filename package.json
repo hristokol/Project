@@ -2,9 +2,6 @@
   "name": "FacebookCopy",
   "version": "0.0.0",
   "private": true,
-  "scripts": {
-    "start": "node ./bin/www"
-  },
   "dependencies": {
     "body-parser": "~1.13.2",
     "cookie-parser": "~1.3.5",
@@ -14,8 +11,11 @@
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0"
   },
-  "devDependencies":{
-    "mocha":"*",
-    "chai":"*"
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*",
+    "gulp-istanbul": "*",
+    "gulp-mocha": "*",
+    "gulp":"*"
   }
 }

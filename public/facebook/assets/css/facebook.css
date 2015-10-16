@@ -305,8 +305,8 @@ small.text-muted {
 @-webkit-keyframes notification {
     0%   {top:0px;}
     25%  {top:0px;}
-    50%  {top:2px;}
-    75%  {top:2px;}
+    50%  {top:5%;}
+    75%  {top:5%;}
     100% {top:0px;}
 }
 
@@ -314,7 +314,7 @@ small.text-muted {
 @keyframes notification {
     0%   {top:0px;}
     25%  {top:0px;}
-    50%  {top:2px;}
-    75%  {top:2px;}
+    50%  {top:5%;}
+    75%  {top:5%;}
     100% {top:0px;}
 }

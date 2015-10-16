@@ -8,9 +8,14 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}));
 router.use(cookieParser());
 
-router.get('/', function (req, res) {
-    res.render('../public/facebook/facebook.html');
+router.get('/', function (request, response) {
+    response.render('../public/SocialNetwork/index.html');
 });
-
+router.get('/signin',function(request,response){
+    response.render('../public/SocialNetwork/signin.html');
+});
+router.get('/register',function(request,response){
+    response.render('../public/SocialNetwork/register.html');
+})
 
 module.exports = router;

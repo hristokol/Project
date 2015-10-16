@@ -16,6 +16,7 @@
     "chai": "*",
     "gulp-istanbul": "*",
     "gulp-mocha": "*",
-    "gulp":"*"
+    "gulp":"*",
+    "supertest":"*"
   }
 }

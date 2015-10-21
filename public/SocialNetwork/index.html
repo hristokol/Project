@@ -10,9 +10,11 @@
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link href="SocialNetwork/assets/css/socialNetwork.css" rel="stylesheet">
+    <link href="SocialNetwork/assets/css/component.css" rel="stylesheet"/>
+    <link href="SocialNetwork/assets/css/pageAnimations.css" rel="stylesheet"/>
 </head>
 
-<body>
+<body ng-app="SocialNetwork" ng-controller="pageController">
 
 <div class="wrapper">
     <div class="box">
@@ -51,7 +53,7 @@
                         </form>
                         <ul class="nav navbar-nav">
                             <li>
-                                <a href="#"><i class="glyphicon glyphicon-user"></i> Profile</a>
+                                <a href="#profile"><i class="glyphicon glyphicon-user"></i> Profile</a>
                             </li>
                             <li>
                                 <a href="#postModal" role="button" data-toggle="modal"><i
@@ -67,7 +69,8 @@
                                 <a href="#" ><span class="badge">Notifications</span></a>
                             </li>-->
                             <li>
-                                <a href="#" ><span class="badge" style="background-color: #FF7F00">Notifications</span></a>
+                                <a href="#"><span class="badge"
+                                                  style="background-color: #FF7F00">Notifications</span></a>
                                 <span class="notification">1</span>
                             </li>
                         </ul>
@@ -88,13 +91,13 @@
                 </div>
                 <!-- /top nav -->
 
-                <div class="padding">
-                    <div class="full col-sm-9">
+                <div class="padding" ng-view>
+                    <!--<div class="full col-sm-9">
 
-                        <!-- content -->
+                        &lt;!&ndash; content &ndash;&gt;
                         <div class="row">
 
-                            <!-- main col left -->
+                            &lt;!&ndash; main col left &ndash;&gt;
                             <div class="col-sm-5">
 
                                 <div class="panel panel-default">
@@ -179,7 +182,7 @@
 
                             </div>
 
-                            <!-- main col right -->
+                            &lt;!&ndash; main col right &ndash;&gt;
                             <div class="col-sm-7">
 
                                 <div class="well">
@@ -273,7 +276,7 @@
 
                             </div>
                         </div>
-                        <!--/row-->
+                        &lt;!&ndash;/row&ndash;&gt;
 
                         <div class="row">
                             <div class="col-sm-6">
@@ -306,7 +309,7 @@
                         <hr>
 
 
-                    </div>
+                    </div>-->
                     <!-- /col-9 -->
                 </div>
                 <!-- /padding -->
@@ -343,7 +346,7 @@
                 </ul>-->
 
             </div>
-                <!-- /main -->
+            <!-- /main -->
 
         </div>
     </div>
@@ -382,6 +385,14 @@
 
 <script type="text/javascript" src="SocialNetwork/assets/js/jquery.js"></script>
 <script type="text/javascript" src="SocialNetwork/assets/js/bootstrap.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-cookies.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.3/ui-bootstrap-tpls.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-animate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.js"></script>
+<script src="SocialNetwork/javascripts/mainApp.js"></script>
+<script src="SocialNetwork/javascripts/profileController.js"></script>
+<script src="SocialNetwork/javascripts/pageController.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('[data-toggle=offcanvas]').click(function () {

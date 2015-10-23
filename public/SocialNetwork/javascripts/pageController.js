@@ -7,7 +7,7 @@ app.controller('pageController', function ($rootScope, $scope) {
         if (i % 2 == 0) {
             $scope.onlineFriends.push({avatar: 'images/nissan.jpg', name: 'Friend', surname: 'Friend'});
         } else {
-            $scope.onlineFriends.push({avatar: 'images/avatar1.jpg', name: 'Friend', surname: 'Friend'});
+            $scope.onlineFriends.push({avatar: 'images/avatar1.jpg', name: 'Friend', surname: 'Friend',online:true});
 
         }
     }

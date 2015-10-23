@@ -278,31 +278,26 @@
                 <!-- /padding -->
             </div>
             <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar" style="background-color: white">
-                <!--Will be used as a feed
-                <!--<ul class="nav">
-                    <li><a href="#" data-toggle="offcanvas" class="visible-xs text-center"><i
-                            class="glyphicon glyphicon-chevron-right"></i></a></li>
-                </ul>
-                &lt;!&ndash;<ul class="nav hidden-xs" id="lg-menu">&ndash;&gt;
-                  &lt;!&ndash;  <li class="active"><a href="#featured"><i class="glyphicon glyphicon-list-alt"></i> Featured</a>
-                    </li>
-                    <li><a href="#stories"><i class="glyphicon glyphicon-list"></i> Stories</a></li>
-                    <li><a href="#"><i class="glyphicon glyphicon-paperclip"></i> Saved</a></li>
-                    <li><a href="#"><i class="glyphicon glyphicon-refresh"></i> Refresh</a></li>&ndash;&gt;
-                &lt;!&ndash;</ul>&ndash;&gt;
-                &lt;!&ndash;<ul class="list-unstyled hidden-xs" id="sidebar-footer">
-                    <li>
-                        <a href="http://usebootstrap.com/theme/facebook"><h3>Bootstrap</h3> <i
-                                class="glyphicon glyphicon-heart-empty"></i> Bootply</a>
-                    </li>
-                </ul>&ndash;&gt;
-                &lt;!&ndash; tiny only nav&ndash;&gt;
-                <ul class="nav visible-xs" id="xs-menu">
-                    &lt;!&ndash;<li><a href="#featured" class="text-center"><i class="glyphicon glyphicon-list-alt"></i></a></li>
-                    <li><a href="#stories" class="text-center"><i class="glyphicon glyphicon-list"></i></a></li>
-                    <li><a href="#" class="text-center"><i class="glyphicon glyphicon-paperclip"></i></a></li>
-                    <li><a href="#" class="text-center"><i class="glyphicon glyphicon-refresh"></i></a></li>&ndash;&gt;
-                </ul>-->
+                <li class="media chatUser" ng-repeat="friend in onlineFriends" style="margin: 0">
+                    <a style="display: block" href="#">
+                    <div class="media-body">
+                        <div class="media-body">
+                            <div class="pull-left" href="#">
+                                <img class="media-object img-csquare" style="max-height:35px;max-width: 35px"
+                                     src="{{friend.avatar}}"/>
+                            </div>
+
+                            <div class="media">
+                                <p style="color: black">{{friend.name}} {{friend.surname}}                        <img ng-show="{{friend.online}}" style="alignment: right" src="images/online.png">
+                                </p>
+                                <div></div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    </a>
+                </li>
 
             </div>
             <!-- /main -->

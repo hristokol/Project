@@ -18,6 +18,7 @@ class RegisterController {
             this.model.register(formData, response, this.registerHandler);
         } else {
             this.registerHandler({error: 'Invalid form'}, response);
+            ///////////
         }
     }
 

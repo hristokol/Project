@@ -8,26 +8,12 @@ var FormValidator = (function () {
         if (name && name != undefined && name != null && validator.isAlpha(name)) {
             return true;
         }
-        /*else if (!name || name == undefined || name == null) {
-         response.json({error: 'Name field is mandatory'});
-         return false;
-         } else if (name && !validator.isAlpha(name)) {
-         response.json({error: 'Name should only contain alphabetical characters'});
-         return false;
-         }*/
         return false;
     };
     FormValidator.prototype.surnameValid = function (surname, response) {
         if (surname && surname != undefined && surname != null && validator.isAlpha(surname)) {
             return true;
         }
-        /*else if (!surname && surname == undefined && surname == null) {
-         response.json({error: 'Surname field is mandatory'});
-         return false;
-         } else if (surname && !validator.isAlpha(surname)) {
-         response.json({error: 'Surname should only contain alphabetical characters'});
-         return false;
-         }*/
         return false;
     };
     FormValidator.prototype.emailValid = function (email, repeatEmail, response) {
@@ -37,19 +23,6 @@ var FormValidator = (function () {
         if (emailValid) {
             return true;
         }
-        /*else if (!emailExists) {
-         response.json({error: 'Email field is mandatory'});
-         return false;
-         } else if (!validator.isEmail(email)) {
-         response.json({error: 'Email is not valid'});
-         return false;
-         } else if (!repeatEmailExists) {
-         response.json({error: 'Repeat Email field is mandatory'});
-         return false;
-         } else if (email !== repeatEmail) {
-         response.json({error: 'Email fields don\'t match'});
-         return false
-         }*/
         return false;
     };
     FormValidator.prototype.passwordValid = function (password, repeatPassword, response) {

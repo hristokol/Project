@@ -1,9 +1,9 @@
 ///<reference path='../node.d.ts'/>
-///<reference path='RegisterFormValidator.ts'/>
+///<reference path='../ValidatorClasses/FormValidator.ts'/>
 'use strict';
 var multer = require('multer');
 var uuid = require('node-uuid');
-var FormValidator = require('RegisterFormValidator');
+var FormValidator = require('../ValidatorClasses/FormValidator');
 var RegisterFormUploadController = (function () {
     function RegisterFormUploadController() {
         this.uploadForm = this.multerUploadObject().single('avatar');

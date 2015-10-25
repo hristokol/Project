@@ -1,9 +1,9 @@
 ///<reference path='../node.d.ts'/>
-///<reference path='RegisterFormValidator.ts'/>
+///<reference path='../ValidatorClasses/FormValidator.ts'/>
 'use strict'
 var multer = require('multer');
 var uuid = require('node-uuid');
-import FormValidator=require('RegisterFormValidator');
+import FormValidator=require('../ValidatorClasses/FormValidator');
 class RegisterFormUploadController {
     private uploadForm:any;
     private formValidator:FormValidator;
@@ -28,10 +28,11 @@ class RegisterFormUploadController {
 
     private formCases(request, response) {
         if (request.file) {
-            //resize in child process
+            //resize in child process and then call RegisterController register() method
         } else {
             //continue uploading form with default avatar
             // req.file = 'url to avatar';
+            //To-Do:call RegisterController register() method
         }
     }
 

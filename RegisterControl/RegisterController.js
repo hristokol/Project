@@ -9,13 +9,7 @@ var RegisterController = (function () {
         this.validator = new FormValidator();
     }
     RegisterController.prototype.register = function (formData, response) {
-        //To-Do: form validation
-        if (this.validator.formValid(formData)) {
-            this.model.register(formData, response, this.registerHandler);
-        }
-        else {
-            this.registerHandler({ error: 'Invalid form' }, response);
-        }
+        this.model.register(formData, response, this.registerHandler);
     };
     RegisterController.prototype.registerHandler = function (status, response) {
         if (status.error) {

@@ -13,13 +13,7 @@ class RegisterController {
     }
 
     public register(formData:any, response:any):void {
-        //To-Do: form validation
-        if (this.validator.formValid(formData)) {
             this.model.register(formData, response, this.registerHandler);
-        } else {
-            this.registerHandler({error: 'Invalid form'}, response);
-            ///////////
-        }
     }
 
     private registerHandler(status:any, response:any):void {

@@ -1,5 +1,6 @@
 ///<reference path='node.d.ts'/>
 'use strict';
+var config = require('./socketConfig.js');
 var app = require('express')();
 var express = require('express');
 var fs = require('fs');

@@ -1,6 +1,7 @@
 ///<reference path='../node.d.ts'/>
+'use strict'
 var validator = require('validator');
-class RegisterFormValidator {
+class FormValidator {
     constructor() {
 
     }
@@ -76,4 +77,4 @@ class RegisterFormValidator {
     }
 
 }
-export=RegisterFormValidator;
+export=FormValidator;

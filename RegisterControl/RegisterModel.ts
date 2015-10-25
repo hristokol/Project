@@ -10,20 +10,21 @@ class RegisterModel {
     }
 
     public register(formData:any, response:any, next) {
-        //To-Do: form validation
         var reg = {
             email: formData.email,
             password: formData.password,
             name: formData.name,
-            surname:formData.surname,
+            surname: formData.surname,
             avatar: formData.avatar,
             position: formData.position
         };
         this.couchbaseBucket.insert('user::' + formData.email, reg, function (error) {
             if (!error) {
-                next({success: 'Successfull registration', response: response});
+                next({success: 'Successfull registration'}, response);
+            } else if (error && error.code == 13) {
+                next({error: 'User with that email already exists'}, response);
             } else {
-                next({error: 'Registration error',response:response});
+                next({error: 'Register error'} ,response);
             }
         });
     }

@@ -1,9 +1,10 @@
 ///<reference path='../node.d.ts'/>
+'use strict';
 var validator = require('validator');
-var RegisterFormValidator = (function () {
-    function RegisterFormValidator() {
+var FormValidator = (function () {
+    function FormValidator() {
     }
-    RegisterFormValidator.prototype.nameValid = function (name, response) {
+    FormValidator.prototype.nameValid = function (name, response) {
         if (name && name != undefined && name != null && validator.isAlpha(name)) {
             return true;
         }
@@ -16,7 +17,7 @@ var RegisterFormValidator = (function () {
          }*/
         return false;
     };
-    RegisterFormValidator.prototype.surnameValid = function (surname, response) {
+    FormValidator.prototype.surnameValid = function (surname, response) {
         if (surname && surname != undefined && surname != null && validator.isAlpha(surname)) {
             return true;
         }
@@ -29,7 +30,7 @@ var RegisterFormValidator = (function () {
          }*/
         return false;
     };
-    RegisterFormValidator.prototype.emailValid = function (email, repeatEmail, response) {
+    FormValidator.prototype.emailValid = function (email, repeatEmail, response) {
         var emailExists = !(!email || email == undefined || email == null);
         var repeatEmailExists = !(!repeatEmail || repeatEmail == undefined || repeatEmail == null);
         var emailValid = emailExists && repeatEmailExists && validator.isEmail(email) && validator.isEmail(repeatEmail) && (email == repeatEmail);
@@ -51,7 +52,7 @@ var RegisterFormValidator = (function () {
          }*/
         return false;
     };
-    RegisterFormValidator.prototype.passwordValid = function (password, repeatPassword, response) {
+    FormValidator.prototype.passwordValid = function (password, repeatPassword, response) {
         var passwordExists = !(password == 'undefined' && !password || password == undefined || password == null);
         var repeatPasswordExists = !(repeatPassword == 'undefined' && !repeatPassword || repeatPassword == undefined || repeatPassword == null);
         var passwordValid = passwordExists && password.length >= 6 && /[a-zA-Z0-9]/.test(password);
@@ -61,14 +62,14 @@ var RegisterFormValidator = (function () {
         }
         return false;
     };
-    RegisterFormValidator.prototype.formValid = function (formData) {
+    FormValidator.prototype.formValid = function (formData) {
         var nameValid = this.nameValid(formData.name);
         var surnameValid = this.surnameValid(formData.surname);
         var emailValid = this.emailValid(formData.email, formData.repeatEmail);
         var passwordValid = this.passwordValid(formData.password, formData.repeatPassword);
         return nameValid && surnameValid && emailValid && passwordValid;
     };
-    return RegisterFormValidator;
+    return FormValidator;
 })();
-module.exports = RegisterFormValidator;
-//# sourceMappingURL=RegisterFormValidator.js.map
+module.exports = FormValidator;
+//# sourceMappingURL=FormValidator.js.map

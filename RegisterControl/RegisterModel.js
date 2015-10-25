@@ -7,7 +7,6 @@ var RegisterModel = (function () {
         this.couchbaseBucket = new DBConnection().getBucket();
     }
     RegisterModel.prototype.register = function (formData, response, next) {
-        //To-Do: form validation
         var reg = {
             email: formData.email,
             password: formData.password,
@@ -18,10 +17,13 @@ var RegisterModel = (function () {
         };
         this.couchbaseBucket.insert('user::' + formData.email, reg, function (error) {
             if (!error) {
-                next({ success: 'Successfull registration', response: response });
+                next({ success: 'Successfull registration' }, response);
+            }
+            else if (error && error.code == 13) {
+                next({ error: 'User with that email already exists' }, response);
             }
             else {
-                next({ error: 'Registration error', response: response });
+                next({ error: 'Register error' }, response);
             }
         });
     };

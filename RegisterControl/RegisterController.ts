@@ -3,6 +3,7 @@
 'use strict'
 import RegisterModel=require('./RegisterModel');
 import FormValidator=require('../ValidatorClasses/FormValidator');
+var emailExistenceChecker = require('email-existence');
 class RegisterController {
     private model;
     private validator;
@@ -15,10 +16,22 @@ class RegisterController {
     public register(formData:any, response:any):void {
         //To-Do:password should be secured and redundant fields should be deleted
         if (this.validator.formValid(formData)) {
-            this.model.register(formData, response, this.registerHandler);
+            this.checkEmailExistence(formData, response);
         } else {
             response.json({error: 'Form invalid'});
         }
+    }
+
+    private checkEmailExistence(formData:any, response:any) :void{
+        var self = this;
+        emailExistenceChecker.check(formData.email, function (error, emailCheckResponse) {
+            if (emailCheckResponse) {
+                //gmail emails checks work, abv - no
+                self.model.register(formData, response, self.registerHandler);
+            } else {
+                response.json({error: 'Email does not exist'});
+            }
+        });
     }
 
     private registerHandler(status:any, response:any):void {

@@ -3,6 +3,7 @@
 'use strict';
 var RegisterModel = require('./RegisterModel');
 var FormValidator = require('../ValidatorClasses/FormValidator');
+var emailExistenceChecker = require('email-existence');
 var RegisterController = (function () {
     function RegisterController() {
         this.model = new RegisterModel();
@@ -11,11 +12,23 @@ var RegisterController = (function () {
     RegisterController.prototype.register = function (formData, response) {
         //To-Do:password should be secured and redundant fields should be deleted
         if (this.validator.formValid(formData)) {
-            this.model.register(formData, response, this.registerHandler);
+            this.checkEmailExistence(formData, response);
         }
         else {
             response.json({ error: 'Form invalid' });
         }
+    };
+    RegisterController.prototype.checkEmailExistence = function (formData, response) {
+        var self = this;
+        emailExistenceChecker.check(formData.email, function (error, emailCheckResponse) {
+            if (emailCheckResponse) {
+                //gmail emails checks work, abv - no
+                self.model.register(formData, response, self.registerHandler);
+            }
+            else {
+                response.json({ error: 'Email does not exist' });
+            }
+        });
     };
     RegisterController.prototype.registerHandler = function (status, response) {
         if (status.error) {

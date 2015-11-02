@@ -1,7 +1,6 @@
 ///<reference path='../node.d.ts'/>
 'use strict'
 var validator = require('validator');
-var emailExistenceChecker = require('email-existence');
 class FormValidator {
     constructor() {
 
@@ -28,22 +27,6 @@ class FormValidator {
         return false;
     }
 
-    private emailExists(email:string, repeatEmail:string) {
-        if (this.emailValid(email, repeatEmail)) {
-            emailExistenceChecker.check(email, function (error, response) {
-               if(error){
-                   console.log(error);
-                   return  false;
-               }
-                if(response){
-                    console.log(response);
-                    return true;
-                }
-            });
-        }
-       // return false;
-    }
-
     private passwordValid(password:string, repeatPassword:string):boolean {
         if (password && repeatPassword) {
             return password.length >= 6 && /[a-zA-Z0-9]/.test(password) && repeatPassword === password;
@@ -58,6 +41,7 @@ class FormValidator {
         var surnameValid:boolean = this.surnameValid(formData.surname);
         var emailValid:boolean = this.emailValid(formData.email, formData.repeatEmail);
         var passwordValid:boolean = this.passwordValid(formData.password, formData.repeatPassword);
+
         return nameValid && surnameValid && emailValid && passwordValid;
     }
 

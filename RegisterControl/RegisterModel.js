@@ -12,14 +12,14 @@ var RegisterModel = (function () {
         var userID = uuid.v4();
         this.couchbaseBucket.insert('user::lookup::email::' + formData.email, { userID: userID }, function (error) {
             if (!error) {
-                self.insertRegistartion(formData, userID, response, next);
+                self.insertRegistration(formData, userID, response, next);
             }
             else {
                 next({ error: 'Register error' }, response);
             }
         });
     };
-    RegisterModel.prototype.insertRegistartion = function (formData, userID, response, next) {
+    RegisterModel.prototype.insertRegistration = function (formData, userID, response, next) {
         this.couchbaseBucket.insert('user::id::' + userID, formData, function (error) {
             if (!error) {
                 next({ success: 'Successfull registration - redirect to login page in 3 seconds' }, response);

@@ -1,7 +1,6 @@
 ///<reference path='../node.d.ts'/>
 'use strict';
 var validator = require('validator');
-var emailExistenceChecker = require('email-existence');
 var FormValidator = (function () {
     function FormValidator() {
     }
@@ -22,21 +21,6 @@ var FormValidator = (function () {
             return validator.isEmail(email) && (email === repeatEmail);
         }
         return false;
-    };
-    FormValidator.prototype.emailExists = function (email, repeatEmail) {
-        if (this.emailValid(email, repeatEmail)) {
-            emailExistenceChecker.check(email, function (error, response) {
-                if (error) {
-                    console.log(error);
-                    return false;
-                }
-                if (response) {
-                    console.log(response);
-                    return true;
-                }
-            });
-        }
-        // return false;
     };
     FormValidator.prototype.passwordValid = function (password, repeatPassword) {
         if (password && repeatPassword) {

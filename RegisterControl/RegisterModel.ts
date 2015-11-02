@@ -26,7 +26,11 @@ class RegisterModel {
     private insertRegistration(formData:any, userID:string, response:any, next):void {
         this.couchbaseBucket.insert('user::id::' + userID, formData, function (error) {
             if (!error) {
-                next({success: 'Successfull registration - redirect to login page in 3 seconds'}, response);
+                next({
+                    success: 'Successfull registration - redirect to login page in 3 seconds',
+                    email: formData.email,
+                    name: formData.name
+                }, response);
             } else {
                 next({error: 'Register error'}, response);
             }

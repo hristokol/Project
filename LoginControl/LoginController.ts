@@ -4,23 +4,24 @@
 var jwt = require('jsonwebtoken');
 var config = require('../routeConfig.js');
 import LoginModel=require('./LoginModel');
+var self;
 class LoginController {
     private model:LoginModel = new LoginModel();
 
     constructor() {
-
+        self = this;
     }
 
-    public isLogged(request:any, response:any, next):void {
+    public loginRequired(request:any, response:any, next):void {
         try {
             jwt.verify(request.session.token, config.jwtSecret);
             next();
         } catch (exception) {
-            response.redirect('/signin');
+            response.redirect('/login');
         }
     }
 
-    public loggedState(request:any, response:any, next):void {
+    public notLogged(request:any, response:any, next):void {
         try {
             jwt.verify(request.session.token, config.jwtSecret);
             response.redirect('/');
@@ -33,24 +34,22 @@ class LoginController {
         this.model.checkDBForUser(session, credentials, response, this.loginHandler);
     }
 
-    private loginHandler(session:any, credentials:any, DBInfo:any, response:any) :void{
+    private loginHandler(DBInfo:any, response:any, session?:any, credentials?:any):void {
         if (DBInfo.error) {
-            response.json(DBInfo.error);
+            response.json({error: DBInfo.error});
         } else {
-            if (this.credentialsMatch(DBInfo, credentials)) {
+            if (self.credentialsMatch(DBInfo, credentials)) {
                 session.token = jwt.sign(DBInfo, config.jwtSecret);
                 response.json({success: 'Successfull login'});
-            }else{
-                response.json({error:'Wrong username or password'});
+            } else {
+                response.json({error: 'Wrong username or password'});
             }
         }
     }
 
     private credentialsMatch(DBInfo:any, credentials:any):boolean {
-        if (credentials.password == DBInfo.password) {
-            return true;
-        }
-        return false;
+        //To-Do:Secure password with bcrypt
+        return credentials.password == DBInfo.password;
     }
 
 }

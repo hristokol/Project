@@ -1,7 +1,7 @@
 ///<reference path='RegisterModel.ts'/>
 ///<reference path='../ValidatorClasses/FormValidator.ts'/>
 'use strict';
-var RegisterModel = require('RegisterModel');
+var RegisterModel = require('./RegisterModel');
 var FormValidator = require('../ValidatorClasses/FormValidator');
 var RegisterController = (function () {
     function RegisterController() {
@@ -9,7 +9,13 @@ var RegisterController = (function () {
         this.validator = new FormValidator();
     }
     RegisterController.prototype.register = function (formData, response) {
-        this.model.register(formData, response, this.registerHandler);
+        //To-Do:password should be secured and redundant fields should be deleted
+        if (this.validator.formValid(formData)) {
+            this.model.register(formData, response, this.registerHandler);
+        }
+        else {
+            response.json({ error: 'Form invalid' });
+        }
     };
     RegisterController.prototype.registerHandler = function (status, response) {
         if (status.error) {

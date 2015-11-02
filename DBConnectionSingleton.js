@@ -6,8 +6,8 @@ var DBConnectionSingleton = (function () {
         if (DBConnectionSingleton.instance) {
             return DBConnectionSingleton.instance;
         }
-        this.cluster = couchbase.Cluster('localhost:8091');
-        this.bucket = this.cluster.getBucket('');
+        this.cluster = new couchbase.Cluster('localhost:8091');
+        this.bucket = this.cluster.openBucket('SocialNetwork');
         DBConnectionSingleton.instance = this;
     }
     DBConnectionSingleton.prototype.getBucket = function () {
@@ -15,5 +15,6 @@ var DBConnectionSingleton = (function () {
     };
     return DBConnectionSingleton;
 })();
+new DBConnectionSingleton();
 module.exports = DBConnectionSingleton;
 //# sourceMappingURL=DBConnectionSingleton.js.map

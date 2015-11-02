@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
-    <title>Signin Template for Bootstrap</title>
+    <title>Register page</title>
     <link href="SocialNetwork/assets/css/bootstrap.css" rel="stylesheet">
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -17,141 +17,106 @@
 <body>
 
 <div class="container-fluid">
-    <form class="form-signin">
+    <form class="form-signin" enctype="multipart/form-data">
         <section class="container">
             <div class="container-page">
                 <div class="col-md-6">
                     <h3 class="dark-grey">Registration</h3>
 
-                    <div class="form-group col-lg-12">
-                        <label>Username</label><label style="color: red">*</label>
-                        <input type="" name="" class="form-control" id="username" value="" required>
-                    </div>
-
-                    <div class="form-group col-lg-6">
-                        <label>Password</label><label style="color: red">*</label>
-                        <input type="password" name="" class="form-control" id="password" value="" required>
-                    </div>
-
-                    <div class="form-group col-lg-6">
-                        <label>Repeat Password</label><label style="color: red">*</label>
-                        <input type="password" name="" class="form-control" id="rePassword" value="" required>
-                    </div>
-
-                    <div class="form-group col-lg-6">
-                        <label>Email Address</label><label style="color: red">*</label>
-                        <input type="email" name="" class="form-control" id="email" value="" required>
-                    </div>
-
-                    <div class="form-group col-lg-6">
-                        <label>Repeat Email Address</label><label style="color: red">*</label>
-                        <input type="email" name="" class="form-control" id="reEmail" value="" required>
-                    </div>
-
                     <div class="form-group col-lg-6">
                         <label>First name</label>
-                        <input type="" name="" class="form-control" id="firstName" value="">
+                        <input type="" name="" class="form-control" id="firstName" value="" required>
                     </div>
 
                     <div class="form-group col-lg-6">
                         <label>Last name</label>
-                        <input type="" name="" class="form-control" id="lastName" value="">
+                        <input type="" name="" class="form-control" id="lastName" value="" required>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label>Email Address</label>
+                        <input type="email" name="" class="form-control" id="email" value="" required>
                     </div>
 
-                    <!--<div class="form-group col-lg-6">
-                        <label>Company</label>
-                        <input type="" name="" class="form-control" id="company" value="">
-                    </div>-->
+                    <div class="form-group col-lg-6">
+                        <label>Repeat Email Address</label>
+                        <input type="email" name="" class="form-control" id="reEmail" value="" required>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label>Password</label>
+                        <input type="password" name="" class="form-control" id="password" value="" required>
+                    </div>
 
-                    <!--<div class="form-group col-lg-6">
-                        <label class="col-lg-6 control-label">Time Zone:</label>
+                    <div class="form-group col-lg-6">
+                        <label>Repeat Password</label>
+                        <input type="password" name="" class="form-control" id="rePassword" value="" required>
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        <label>Position</label>
+                        <input type="" name="" class="form-control" id="position" value="" required>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label class="col-lg-6 control-label">Team leader</label>
 
                         <div class="col-lg-16">
                             <div class="ui-select">
-                                <select id="user_time_zone" class="form-control">
-                                    <option value="Hawaii">(GMT-10:00) Hawaii</option>
-                                    <option value="Alaska">(GMT-09:00) Alaska</option>
-                                    <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp;
-                                        Canada)
-                                    </option>
-                                    <option value="Arizona">(GMT-07:00) Arizona</option>
-                                    <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp;
-                                        Canada)
-                                    </option>
-                                    <option value="Central Time (US &amp; Canada)" selected="selected">(GMT-06:00)
-                                        Central Time (US &amp; Canada)
-                                    </option>
-                                    <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp;
-                                        Canada)
-                                    </option>
-                                    <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
+                                <select id="teamLeader" class="form-control" >
+                                    <option value="Back-End">Name Name:Back-end</option>
+                                    <option value="Front-End">Name1 Name1:Front-end</option>
+                                    <option value="Game-Dev">Name2 Name2:Game-dev</option>
+                                    <option value="QA">Name3 Name3:QA</option>
+                                    <option value="Marketing">Name4 Name4:Marketing</option>
                                 </select>
                             </div>
                         </div>
-                    </div>-->
+                    </div>
+
                     <div class="col-lg-6" id="err">
                         <button type="submit" class="btn btn-primary">Register</button>
                         <label id="infoLabel" style="color:red"></label>
                     </div>
-                    <label style="color: red">* </label><label> - Required field</label>
-
+                    <label> All fields are mandatory</label>
                 </div>
-
-
             </div>
         </section>
     </form>
 </div>
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
-<!--<script type="text/javascript" src="js/validator.min.js"></script>-->
 <script>
     $('form').submit(function (e) {
         e.preventDefault();
-        if (formValid()) {
-            username = $('#username').val();
-            email = $("#email").val();
-            reEmail = $("#reEmail").val();
-            pass = $("#password").val();
-            rePass = $("#rePassword").val();
-            firstName = $('#firstName').val();
-            lastName = $('#lastName').val();
-            company = $('#company').val();
-            timezone = $('#user_time_zone').val();
-            $.post("https://hristo.com:2000/register", {
-                'username': username,
-                'email': email,
-                'reEmail': reEmail,
-                'password': pass,
-                'rePassword': rePass,
-                'firstName': firstName,
-                'lastName': lastName/*,
-                'company': company,
-                'timezone': timezone*/
-            }, function (data) {
-                console.log(data);
-                if (data.error) {
-                    $("#infoLabel").text(data.error);
-                }
-                if (data.success) {
-                    $("#infoLabel").css("color", 'green');
-                    $("#infoLabel").text(data.success);
-                    window.setTimeout(function () {
-                        window.location.href = 'https://hristo.com:2000/signin';
-                    }, 3 * 1000);
-                }
-            });
-        }
+        var formData = new FormData();
+        formData.append('name', $('#firstName').val());
+        formData.append('surname', $('#lastName').val());
+        formData.append('email', $('#email').val());
+        formData.append('reEmail', $('#reEmail').val());
+        formData.append('password', $('#password').val());
+        formData.append('rePassword', $('#rePassword').val());
+        formData.append('position', $('#position').val());
+        formData.append('teamLeader', $('#teamLeader').val());
+        $.ajax({
+            url: 'https://hristo.com:2000/register',
+            type: 'POST',
+            data: formData,
+            dataType:'json',
+            mimeType: "multipart/form-data",
+            contentType: false,
+            cache: false,
+            processData: false
+        }).done(function (serverResponse) {
+            console.log(serverResponse);
+            if (serverResponse.error) {
+                $("#infoLabel").text(serverResponse.error);
+            }
+            if (serverResponse.success) {
+                $("#infoLabel").css("color", 'green');
+                $("#infoLabel").text(serverResponse.success);
+                window.setTimeout(function () {
+                    window.location.href = 'https://hristo.com:2000/login';
+                }, 3 * 1000);
+            }
+        });
     });
-
-    /*function usernameValid() {
-        return /[a-zA-Z0-9]/.test(username = $('#username').val());
-    }
-
-    function formValid() {
-        return usernameValid();
-    }*/
-
-
 </script>
 </body>
 </html>

@@ -1,26 +1,28 @@
 ///<reference path='../node.d.ts'/>
 ///<reference path='../DBConnectionSingleton.ts'/>
 'use strict';
+var uuid = require('node-uuid');
 var DBConnection = require('../DBConnectionSingleton');
 var RegisterModel = (function () {
     function RegisterModel() {
         this.couchbaseBucket = new DBConnection().getBucket();
     }
     RegisterModel.prototype.register = function (formData, response, next) {
-        var reg = {
-            email: formData.email,
-            password: formData.password,
-            name: formData.name,
-            surname: formData.surname,
-            avatar: formData.avatar,
-            position: formData.position
-        };
-        this.couchbaseBucket.insert('user::' + formData.email, reg, function (error) {
+        var self = this;
+        var userID = uuid.v4();
+        this.couchbaseBucket.insert('user::lookup::email::' + formData.email, { userID: userID }, function (error) {
             if (!error) {
-                next({ success: 'Successfull registration' }, response);
+                self.insertRegistartion(formData, userID, response, next);
             }
-            else if (error && error.code == 13) {
-                next({ error: 'User with that email already exists' }, response);
+            else {
+                next({ error: 'Register error' }, response);
+            }
+        });
+    };
+    RegisterModel.prototype.insertRegistartion = function (formData, userID, response, next) {
+        this.couchbaseBucket.insert('user::id::' + userID, formData, function (error) {
+            if (!error) {
+                next({ success: 'Successfull registration - redirect to login page in 3 seconds' }, response);
             }
             else {
                 next({ error: 'Register error' }, response);

@@ -1,6 +1,7 @@
 ///<reference path='../node.d.ts'/>
 ///<reference path='../DBConnectionSingleton.ts'/>
 'use strict'
+var uuid = require('node-uuid');
 import DBConnection=require('../DBConnectionSingleton');
 class RegisterModel {
     private couchbaseBucket;
@@ -9,22 +10,25 @@ class RegisterModel {
         this.couchbaseBucket = new DBConnection().getBucket();
     }
 
-    public register(formData:any, response:any, next) {
-        var reg = {
-            email: formData.email,
-            password: formData.password,
-            name: formData.name,
-            surname: formData.surname,
-            avatar: formData.avatar,
-            position: formData.position
-        };
-        this.couchbaseBucket.insert('user::' + formData.email, reg, function (error) {
+    public register(formData:any, response:any, next):void {
+        var self = this;
+        var userID = uuid.v4();
+        this.couchbaseBucket.insert('user::lookup::email::' + formData.email, {userID: userID}, function (error) {
             if (!error) {
-                next({success: 'Successfull registration'}, response);
-            } else if (error && error.code == 13) {
-                next({error: 'User with that email already exists'}, response);
+                self.insertRegistartion(formData, userID, response, next);
             } else {
-                next({error: 'Register error'} ,response);
+                next({error: 'Register error'}, response);
+            }
+        });
+
+    }
+
+    private insertRegistartion(formData:any, userID:string, response:any, next):void {
+        this.couchbaseBucket.insert('user::id::' + userID, formData, function (error) {
+            if (!error) {
+                next({success: 'Successfull registration - redirect to login page in 3 seconds'}, response);
+            } else {
+                next({error: 'Register error'}, response);
             }
         });
     }

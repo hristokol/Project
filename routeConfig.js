@@ -6,4 +6,4 @@ var session = require('client-sessions');
 var cookieOptions = {ephemeral: false, httpOnly: true, secure: true};
 var sessionDuration = 5 * 60 * 1000;
 var sessionOptions = {cookieName: 'session', secret: cookieSecret, duration: sessionDuration, cookie: cookieOptions};
-module.exports = {session:session,sessionOptions:sessionOptions};
+module.exports = {session:session,sessionOptions:sessionOptions,jwtSecret:jwtSecret};

@@ -11,8 +11,8 @@ class DBConnectionSingleton {
         if (DBConnectionSingleton.instance) {
             return DBConnectionSingleton.instance;
         }
-        this.cluster = couchbase.Cluster('localhost:8091');
-        this.bucket = this.cluster.getBucket('');
+        this.cluster = new couchbase.Cluster('localhost:8091');
+        this.bucket = this.cluster.openBucket('SocialNetwork');
         DBConnectionSingleton.instance = this;
     }
 
@@ -22,4 +22,5 @@ class DBConnectionSingleton {
     }
 
 }
+new DBConnectionSingleton();
 export=DBConnectionSingleton;

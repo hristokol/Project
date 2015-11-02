@@ -1,54 +1,86 @@
 ///<reference path='../node.d.ts'/>
 ///<reference path='../ValidatorClasses/FormValidator.ts'/>
+///<reference path='RegisterController.ts'/>
 'use strict'
 var multer = require('multer');
 var uuid = require('node-uuid');
+var path = require('path');
+var child = require('child_process');
 import FormValidator=require('../ValidatorClasses/FormValidator');
+import RegisterController=require('./RegisterController');
+var self;
 class RegisterFormUploadController {
     private uploadForm:any;
-    private formValidator:FormValidator;
+    private registerController:RegisterController;
 
     constructor() {
-        this.uploadForm = this.multerUploadObject().single('avatar');
-        this.formValidator = new FormValidator();
+        this.uploadForm = this.multerUploadObject().single();
+        this.registerController = new RegisterController();
+        self = this;
     }
 
-    public upload(request, response):void {
-        this.uploadForm(request, response, function (error) {
+    public upload(request:any, response:any):void {
+        self.uploadForm(request, response, function (error) {
             if (error) {
-                response.json('Error uploading form');
-                //To-Do: error codes
-            } else if (this.formValidator.formValid(request.body)) {
-                this.formCases(request)
+                response.json({error: 'Error uploading form'});
             } else {
-                response.json('Form is not valid');
+                if (request.body) {
+                    self.sendDataToController(request.body, response);
+                }else{
+                    console.log('Empty request sent');
+                }
             }
         });
     }
 
-    private formCases(request, response) {
-        if (request.file) {
-            //resize in child process and then call RegisterController register() method
-        } else {
-            //continue uploading form with default avatar
-            // req.file = 'url to avatar';
-            //To-Do:call RegisterController register() method
-        }
+    private sendDataToController(body:any, response:any):void {
+        var formData = {
+            email: body.email,
+            repeatEmail: body.reEmail,
+            password: body.password,
+            repeatPassword: body.rePassword,
+            name: body.name,
+            surname: body.surname,
+            avatar: '../Avatars/defaultAvatar.jpeg',
+            wallPhoto: '../WallPhotos/defaultWallPhoto.jpeg',
+            position: body.position
+        };
+        this.registerController.register(formData, response);
+    }
+    private multerLimits():any {
+        //To-Do:determine field sizes and set limits on them
+        return {files: 0, fields: 8};
+    }
+
+    private multerUploadObject():any {
+        return multer({
+            limits: this.multerLimits()
+        });
+    }
+
+    private resizeInChildProcess(pathToImage:string, pathToSaveImage:string, dimensions:any) {
+        var imageChildProcess = path.resolve(__dirname, './ImageResizerClass.js');
+        var childProcess = child.fork(imageChildProcess);
+        childProcess.on('error', function (error) {
+            console.log(error);
+        });
+        childProcess.on('exit', function () {
+            //resizing ended with no problems
+            console.log('Image resize ended successfully');
+        });
+
+        childProcess.send(pathToImage, pathToSaveImage, dimensions);
     }
 
     private multerStorage():any {
         return multer.diskStorage({
             destination: function (req, file, cb) {
-                cb(null, 'public/uploads/')
+                cb(null, '../UploadedImages');
             },
             filename: function (req, file, cb) {
                 cb(null, file.fieldname + '-' + uuid.v4() + '.' + file.mimetype.split('/')[1]);
             }
         });
-    }
-
-    private multerLimits():any {
-        return {fileSize: Math.pow(20, 6), files: 1, fields: 6};
     }
 
     private multerFileFilter(request, file, callback):any {
@@ -59,8 +91,7 @@ class RegisterFormUploadController {
         }
     }
 
-    private multerUploadObject():any {
-        return multer({fileFilter: this.multerFileFilter, limits: this.multerLimits(), storage: this.multerStorage()});
-    }
+
+
 }
 export=RegisterFormUploadController;

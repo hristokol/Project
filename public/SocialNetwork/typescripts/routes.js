@@ -11,9 +11,8 @@ var SocialNetwork;
                 templateUrl: 'SocialNetwork/profile.htm',
                 controller: 'SocialNetwork.Controllers.ProfileController'
             }).when('/', {
-                templateUrl: 'SocialNetwork/home.html',
-                controller: 'SocialNetwork.Controllers.PageController'
-            }).when('/postModal', { redirectTo: '/' }).otherwise({ redirectTo: "/home" });
+                templateUrl: 'SocialNetwork/home.html'
+            }).when('/postModal', { redirectTo: '/' }).otherwise('/');
         };
         Routes.$inject = ["$routeProvider"];
         return Routes;

@@ -14,7 +14,7 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}));
 router.use(cookieParser());
 
-router.get('/', loginControl.loginRequired, function (request, response) {
+router.get('/'/*, loginControl.loginRequired*/, function (request, response) {
     response.render('../public/SocialNetwork/index.html');
 });
 router.get('/login', loginControl.notLogged, function (request, response) {

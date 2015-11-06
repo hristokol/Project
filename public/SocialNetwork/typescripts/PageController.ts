@@ -10,16 +10,19 @@ module SocialNetwork.Controllers {
             this.scope = $scope;
             this.rootScope = $rootScope;
             this.scope.$on('$routeChangeSuccess', this.routeChangeSuccessHandler);
-            this.rootScope.$on('$routeChangeStartHandler', this.routeChangeStartHandler);
+            this.rootScope.$on('$routeChangeStart', this.routeChangeStartHandler);
             this.scope.onlineFriends = [];
             this.fillChatAreaWithFakeFriends();
         }
 
         private routeChangeSuccessHandler = ()=> {
+            console.log('here');
+
             this.rootScope.pageLoaded = true;
         }
 
         private routeChangeStartHandler = (event, next, current)=> {
+            console.log('there');
             if (next.$$route.originalPath == '/postModal' && current && current.$$route.originalPath == '/') {
                 event.preventDefault();
             }
@@ -41,5 +44,5 @@ module SocialNetwork.Controllers {
         }
 
     }
-    angular.module('SocialNetwork').controller('SocialNetwork.Controllers.PageController', PageController);
+    angular.module('SocialNetwork').controller('SocialNetwork.Controllers.PageController',['$scope','$rootScope', PageController]);
 }

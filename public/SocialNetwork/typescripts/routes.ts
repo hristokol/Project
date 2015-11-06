@@ -13,11 +13,10 @@ module SocialNetwork {
                     controller: 'SocialNetwork.Controllers.ProfileController'
                 }).
                 when('/', {
-                    templateUrl: 'SocialNetwork/home.html',
-                    controller: 'SocialNetwork.Controllers.PageController'
+                    templateUrl: 'SocialNetwork/home.html'
                 }).
                 when('/postModal', {redirectTo: '/'}).
-                otherwise({redirectTo: "/home"});
+                otherwise('/');
         }
     }
 }

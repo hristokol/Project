@@ -14,7 +14,7 @@
     <link href="SocialNetwork/assets/css/pageAnimations.css" rel="stylesheet"/>
 </head>
 
-<body ng-app="SocialNetwork" ng-controller="pageController">
+<body ng-app="SocialNetwork" ng-controller="SocialNetwork.Controllers.PageController">
 
 <div class="wrapper">
     <div class="box">
@@ -284,7 +284,7 @@
                         <div class="media-body">
                             <div class="pull-left" href="#">
                                 <img class="media-object img-csquare" style="max-height:35px;max-width: 35px"
-                                     src="{{friend.avatar}}"/>
+                                     ng-src="{{friend.avatar}}"/>
                             </div>
 
                             <div class="media">
@@ -344,9 +344,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.3/ui-bootstrap-tpls.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-animate.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.js"></script>
-<script src="SocialNetwork/javascripts/mainApp.js"></script>
-<script src="SocialNetwork/javascripts/profileController.js"></script>
-<script src="SocialNetwork/javascripts/pageController.js"></script>
+<script src="SocialNetwork/typescripts/routes.js"></script>
+<script src="SocialNetwork/typescripts/MainApp.js"></script>
+<script src="SocialNetwork/typescripts/ProfileController.js"></script>
+<script src="SocialNetwork/typescripts/PageController.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('[data-toggle=offcanvas]').click(function () {

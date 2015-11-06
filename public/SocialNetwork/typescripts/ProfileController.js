@@ -12,7 +12,7 @@ var SocialNetwork;
             return ProfileController;
         })();
         Controllers.ProfileController = ProfileController;
-        angular.module('SocialNetwork').controller('SocialNetwork.Controllers.ProfileController', ProfileController);
+        angular.module('SocialNetwork').controller('SocialNetwork.Controllers.ProfileController', ['$scope', ProfileController]);
     })(Controllers = SocialNetwork.Controllers || (SocialNetwork.Controllers = {}));
 })(SocialNetwork || (SocialNetwork = {}));
 //# sourceMappingURL=ProfileController.js.map

@@ -10,5 +10,5 @@ module SocialNetwork.Controllers {
             this.scope.pageClass = 'profile-page';
         }
     }
-    angular.module('SocialNetwork').controller('SocialNetwork.Controllers.ProfileController',ProfileController);
+    angular.module('SocialNetwork').controller('SocialNetwork.Controllers.ProfileController',['$scope',ProfileController]);
 }

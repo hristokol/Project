@@ -1,14 +1,18 @@
 ///<reference path='../../../angular.d.ts'/>
+///<reference path='SocketService.ts'/>
 'use strict'
 
 module SocialNetwork.Controllers {
     export class PageController {
         scope:any;
         rootScope:any;
+        SocketService:any;
 
-        constructor($scope:ng.IScope, $rootScope:any) {
+        constructor($scope:ng.IScope, $rootScope:any, $attrs:any, SocketService:any) {
             this.scope = $scope;
             this.rootScope = $rootScope;
+            this.SocketService = SocketService;
+            SocketService.connect($attrs.token);
             this.scope.$on('$routeChangeSuccess', this.routeChangeSuccessHandler);
             this.rootScope.$on('$routeChangeStart', this.routeChangeStartHandler);
             this.scope.onlineFriends = [];
@@ -16,13 +20,10 @@ module SocialNetwork.Controllers {
         }
 
         private routeChangeSuccessHandler = ()=> {
-            console.log('here');
-
             this.rootScope.pageLoaded = true;
         }
 
         private routeChangeStartHandler = (event, next, current)=> {
-            console.log('there');
             if (next.$$route.originalPath == '/postModal' && current && current.$$route.originalPath == '/') {
                 event.preventDefault();
             }
@@ -44,5 +45,5 @@ module SocialNetwork.Controllers {
         }
 
     }
-    angular.module('SocialNetwork').controller('SocialNetwork.Controllers.PageController',['$scope','$rootScope', PageController]);
+    angular.module('SocialNetwork').controller('SocialNetwork.Controllers.PageController', ['$scope', '$rootScope', '$attrs', 'SocialNetwork.Services.SocketService', PageController]);
 }
